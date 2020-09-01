@@ -1,0 +1,4 @@
+spring.datasource.url=jdbc:mysql://localhost:3036/AngularDatabase
+spring.datasource.username=root@localhost
+spring.datasource.password=Chaudhary#1
+spring.jpa.hibernate.ddl-auto=create-drop

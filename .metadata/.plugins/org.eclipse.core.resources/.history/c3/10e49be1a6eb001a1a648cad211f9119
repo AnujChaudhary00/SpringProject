@@ -1,0 +1,63 @@
+package com.example.demo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LibraryService {
+
+	
+	List<Library> library=new ArrayList<Library>(Arrays.asList(
+			
+			new Library("Book", "Author", "Price", "Status"),
+			new Library("Fault in our stars","John Green","500","Allotes"),
+			new Library("Life Amazing Secret","Gaur Gopal Das","230","Not Alloted"),
+			new Library("ABC","BCA","45","Alloted")	
+			));
+
+		@Autowired
+		BookRepositry bookRepo;
+	
+	
+public List<Library> getBooks()
+{
+	ArrayList<Library> allBooks =new ArrayList<>();
+	
+	bookRepo.findAll().forEach(allBooks::add);
+	return allBooks;
+}
+
+public Optional<Library> getBook(String authr)
+{
+	return bookRepo.findById(authr);
+}
+
+public Library getAuthor(String BOOK)
+{
+	return library.stream().filter(auth -> auth.getBook().equals(BOOK)).findFirst().get();
+}
+
+public void addBook(Library mov)
+{
+	bookRepo.save(mov);
+}
+
+public void deletebook(String id)
+{
+	bookRepo.deleteById(id);
+}
+
+
+
+public void updateBook(Library updatedBok, String id) {
+	// TODO Auto-generated method stub
+	
+		bookRepo.save(updatedBok);
+}
+
+}
